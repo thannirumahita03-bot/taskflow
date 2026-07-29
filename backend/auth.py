@@ -4,7 +4,12 @@ from jose import jwt, JWTError
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
-SECRET_KEY = "mysecretkey"
+import os
+
+SECRET_KEY = os.getenv(
+    "JWT_SECRET",
+    "development-secret"
+)
 ALGORITHM = "HS256"
 
 pwd_context = CryptContext(
